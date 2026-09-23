@@ -6,28 +6,51 @@ Escreva sua solucao no lugar do 'pass'.
 
 
 def remove_negativos(lista):
-    """Devolve uma lista nova so com os numeros que nao sao negativos."""
-    pass
+    resultado = []
+    for i in lista:
+        if i >= 0:
+            resultado.append(i)
+    return resultado       
+            
 
 
 def inverte(lista):
-    """Devolve uma lista nova na ordem contraria.
-    Sem usar reverse() e sem usar [::-1]."""
-    pass
+    resultado = []
+    j = len(lista)-1
+while j >=0:
+    resultado.append(lista(j))
+
 
 
 def busca_binaria(lista, alvo):
-    """Recebe uma lista JA ORDENADA. Devolve a posicao do alvo, ou -1."""
-    pass
+    esq = 0
+    dir = len(lista) - 1
+
+    while esq <= dir:
+        meio = (esq + dir) // 2
+        if lista[meio] == alvo:
+            return meio
+        
+        if lista[meio] < alvo:
+            esq = meio + 1
+
+        else:
+            dir = meio - 1
+
+        return -1
+
 
 
 def intercala(lista_a, lista_b):
-    """Devolve uma lista nova alternando os elementos das duas.
-    As duas listas tem o mesmo tamanho."""
-    pass
+    intercalada = []
+    for i in range(len(lista1)):
+        intercalada.append(lista1[i])
+        intercalada.append(lista2[i])
+    return intercalada
+
 
 
 def remove_repetidos(lista):
-    """(Desafio) Devolve uma lista nova sem repetidos,
-    mantendo a ordem da primeira aparicao."""
-    pass
+    removerepet = []
+    for i in range(len(lista)):
+        
