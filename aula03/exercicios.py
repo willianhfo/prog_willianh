@@ -15,14 +15,14 @@ Quem devolve so o resultado nao passa nos testes.
 def soma_contando(lista):
    soma = 0
    operadores = 0
-   n 
+   n = 0
    for n in lista:
-    soma = soma + operadores + 1
-   return soma, operadores 
+    soma = soma + n
+    operadores += 1
+   return (soma, operadores) 
 
 def busca_linear_contando(lista, alvo):
     comparacoes = 0
-    n
     for n in range(len(lista)):
        comparacoes += 1
        if lista[n] == alvo:
@@ -33,19 +33,22 @@ def busca_linear_contando(lista, alvo):
 
 
 def busca_binaria_contando(lista, alvo):
-     inicio = 0
-     fim = len(lista) - 1
-     comparacoes = 0
-     while inicio <= fim:
+    inicio = 0
+    fim = len(lista) - 1
+    comparacoes = 0
+    
+    while inicio <= fim:
         meio = (inicio + fim) // 2
         comparacoes += 1
+        
         if lista[meio] == alvo:
-           return (meio, comparacoes)
+            return (meio, comparacoes)
         elif lista[meio] < alvo:
-           inicio = meio + 1
+            inicio = meio + 1
         else:
-           fim = meio -1
-     return (-1, comparacoes)
+            fim = meio - 1
+            
+    return (-1, comparacoes)
 
 def tem_repetido_contando(lista):
     comparacoes = 0
@@ -83,7 +86,7 @@ def mais_frequente_contando(lista):
             comparacoes += 1
             if lista[i] == lista[j]:
                 frequencia_atual += 1
-                
+
         if frequencia_atual > max_frequencia:
             max_frequencia = frequencia_atual
             elemento_mais_frequente = lista[i]
