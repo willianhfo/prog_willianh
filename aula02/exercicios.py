@@ -51,6 +51,13 @@ def intercala(lista_a, lista_b):
 
 
 def remove_repetidos(lista):
-    removerepet = []
-    for i in range(len(lista)):
-        
+  removerepet = []
+
+    for n in lista_original:
+
+    if n not in removerepet:
+        removerepet.append(numero)
+
+    return removerepet
+
+
