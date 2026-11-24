@@ -12,81 +12,154 @@ o mesmo contrato da aula05.
 # ---------- Bloco 1: ordenacao ----------
 
 def passagem_bubble(lista):
-    """Uma unica passagem completa da esquerda para a direita, trocando
-    vizinhos fora de ordem. Devolve uma copia; nao altera a entrada."""
-    pass
+     resultado = list(lista)
+    n = len(resultado)
+    for i in range(n - 1):
+        if resultado[i] > resultado[i + 1]:
+            resultado[i], resultado[i + 1] = resultado[i + 1], resultado[i]
+    return resultado
 
 
 def bubble_sort(lista):
-    """Bubble sort crescente, parando quando uma passagem nao faz troca.
-    Devolve (lista_ordenada, comparacoes, trocas): conte toda comparacao
-    entre vizinhos e somente as trocas que acontecerem."""
-    pass
+    resultado = list(lista)
+    n = len(resultado)
+    comparacoes = 0
+    trocas = 0
+    for fim in range(n - 1, 0, -1):
+        trocou = False
+        for i in range(fim):
+            comparacoes += 1
+            if resultado[i] > resultado[i + 1]:
+                resultado[i], resultado[i + 1] = resultado[i + 1], resultado[i]
+                trocas += 1
+                trocou = True
+        if not trocou:
+            break
+    return resultado, comparacoes, trocas
+
 
 
 def selection_sort(lista):
-    """Selection sort crescente. Devolve (lista_ordenada, comparacoes,
-    trocas): conte cada comparacao entre candidatos e as trocas reais
-    (nao conte a troca de um valor consigo mesmo)."""
-    pass
+    resultado = list(lista)
+    n = len(resultado)
+    comparacoes = 0
+    trocas = 0
+    for i in range(n):
+        min_idx = i
+        for j in range(i + 1, n):
+            comparacoes += 1
+            if resultado[j] < resultado[min_idx]:
+                min_idx = j
+        if min_idx != i:
+            resultado[i], resultado[min_idx] = resultado[min_idx], resultado[i]
+            trocas += 1
+    return resultado, comparacoes, trocas
+
 
 
 def insertion_sort(lista):
-    """Insira cada proximo valor na posicao certa do trecho ja ordenado.
-    Devolve uma copia; nao altera a entrada."""
-    pass
+    resultado = list(lista)
+    for i in range(1, len(resultado)):
+        chave = resultado[i]
+        j = i - 1
+        while j >= 0 and resultado[j] > chave:
+            resultado[j + 1] = resultado[j]
+            j -= 1
+        resultado[j + 1] = chave
+    return resultado
 
 
 def quicksort(lista):
-    """(Desafio) Quicksort recursivo, separando menores, iguais e maiores
-    que o pivo. Devolve uma copia."""
-    pass
+    if len(lista) <= 1:
+        return list(lista)
+    pivo = lista[len(lista) // 2]
+    menores = [x for x in lista if x < pivo]
+    iguais = [x for x in lista if x == pivo]
+    maiores = [x for x in lista if x > pivo]
+    return quicksort(menores) + iguais + quicksort(maiores)
+
 
 
 # ---------- Bloco 2: dois indices e janela ----------
 
 def eh_palindromo(texto):
-    """True se a sequencia for igual de tras para frente. Maiusculas e
-    espacos contam."""
-    pass
+    esq = 0
+    dir = len(texto) - 1
+    while esq < dir:
+        if texto[esq] != texto[dir]:
+            return False
+        esq += 1
+        dir -= 1
+    return True
 
 
 def par_que_soma(lista, alvo):
-    """Lista JA ORDENADA. Dois indices distintos cuja soma e alvo, ou
-    (-1, -1). Use dois indices, sem laco dentro de laco."""
-    pass
+    esq = 0
+    dir = len(lista) - 1
+    while esq < dir:
+        soma = lista[esq] + lista[dir]
+        if soma == alvo:
+            return (esq, dir)
+        if soma < alvo:
+            esq += 1
+        else:
+            dir -= 1
+    return (-1, -1)
 
 
 def remove_repetidos_ordenada(lista):
-    """Lista JA ORDENADA. Copia com uma ocorrencia de cada valor."""
-    pass
+    if not lista:
+        return []
+    resultado = [lista[0]]
+    for item in lista[1:]:
+        if item != resultado[-1]:
+            resultado.append(item)
+    return resultado
+
 
 
 def soma_maxima_janela(lista, k):
-    """Maior soma de um trecho consecutivo de tamanho k (1 <= k <= n).
-    Atualize a janela sem somar tudo de novo."""
-    pass
+    soma_atual = sum(lista[:k])
+    maior_soma = soma_atual
+    for i in range(k, len(lista)):
+        soma_atual += lista[i] - lista[i - k]
+        if soma_atual > maior_soma:
+            maior_soma = soma_atual
+    return maior_soma
 
 
 def conta_janelas_acima(lista, k, limite):
-    """(Desafio) Quantas janelas consecutivas de tamanho k tem soma
-    ESTRITAMENTE maior que limite. Atualize a soma em tempo constante."""
-    pass
+    soma_atual = sum(lista[:k])
+    contador = 1 if soma_atual > limite else 0
+    for i in range(k, len(lista)):
+        soma_atual += lista[i] - lista[i - k]
+        if soma_atual > limite:
+            contador += 1
+    return contador
 
 
 # ---------- Bloco 3: contagem por chave ----------
 
 def conta_frequencias(lista):
-    """Dicionario com a frequencia de cada valor."""
-    pass
+    freq = {}
+    for item in lista:
+        freq[item] = freq.get(item, 0) + 1
+    return freq
 
 
 def mais_frequente(lista):
-    """Valor mais frequente; em empate, o que apareceu primeiro.
-    Lista nao vazia."""
-    pass
+    freq = conta_frequencias(lista)
+    melhor_item = lista[0]
+    maior_freq = freq[melhor_item]
+    for item in lista:
+        if freq[item] > maior_freq:
+            maior_freq = freq[item]
+            melhor_item = item
+    return melhor_item
 
 
 def primeiro_unico(lista):
-    """Primeiro valor que aparece uma unica vez, ou None. Use dicionario."""
-    pass
+    freq = conta_frequencias(lista)
+    for item in lista:
+        if freq[item] == 1:
+            return item
